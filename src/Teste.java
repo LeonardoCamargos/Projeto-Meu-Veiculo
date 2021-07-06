@@ -38,6 +38,7 @@ public class Teste {
 
 			switch (opcao) {
 			//------------------------------------CASE 1 -cadastro de proprietario------------------------------------------------------------
+			
 			case 1: { // 1 - cadastro de proprietario
 				Proprietario plida = lerDadosProprietario();
 				inserirProprietario(plida);
@@ -56,6 +57,7 @@ public class Teste {
 				break;
 			}
 
+			
 			//------------------------------------CASE 3. Busca de proprietário pelo e-mail------------------------------------------------------------
 			case 3: { // 3. Busca de proprietário pelo e-mail
 				Scanner ler = new Scanner(System.in);
@@ -71,6 +73,25 @@ public class Teste {
 				}
 				break;
 			}
+			
+			//------------------------------------CASE 4. Relatório de todos os proprietários de veículos, considerando o nome do proprietário em ordem alfabética, a placa e a descrição do ou dos veículos os quais ele é proprietário------------------------------------------------------------
+			
+			case 4:{
+				
+				System.out.println("A seguir lista de todos veiculos cadastrados!!");
+				ArrayList<VeiculoResponse> vEcontrada = buscarVeiculoCompleto();
+
+				System.out.println("VEICULOS ENCONTRADOS");
+
+				for (int i = 0; i < vEcontrada.size(); i++) {
+					VeiculoResponse v = vEcontrada.get(i);
+					mostrarVeiculosPelaCorOuQuantidadeDePortas(v);
+				}
+				break;
+				
+			}
+				
+			
 			
 			//------------------------------------CASE - 5 - Alterar Proprietario pelo email------------------------------------------------------------
 			case 5: {
@@ -95,6 +116,8 @@ public class Teste {
 					
 			}
 			
+			
+			
 			//------------------------------------CASE - 6 - cadastro de veiculo------------------------------------------------------------
 			case 6: { // 6 - cadastro de veiculo
 				Veiculo vlida = lerDadosVeiculo();
@@ -103,6 +126,8 @@ public class Teste {
 				break;
 			}
 
+			
+			
 			//------------------------------------CASE - 7 - remocao de veiculo------------------------------------------------------------
 			case 7: { // 7 - remocao de veiculo
 
@@ -115,6 +140,8 @@ public class Teste {
 				break;
 
 			}
+			
+			
 			
 			//------------------------------------CASE - 8 - Busca veículo pela placa -------------------------------------------------------------
 			case 8: { // 8 - Busca veículo pela placa - Diferencial pelo nome e não pelo ID e // validação da placa funcionando ok!!
@@ -133,7 +160,30 @@ public class Teste {
 				break;
 
 			}
+			
+			
+			
+			//------------------------------------CASE - 8 - Relatório Todos Veiculos -------------------------------------------------------------
+			case 9:{
+				
+				Scanner ler = new Scanner(System.in);
+				String veiculoBuscado;
+				System.out.println("Digite a cor do veiculo que será buscado: ");
+				veiculoBuscado = ler.next();
 
+				ArrayList<VeiculoResponse> vetVeiculos = listaVeiculosBuscadosPelaCor(veiculoBuscado);
+
+				System.out.println("VEICULOS ENCONTRADOS");
+
+				for (int i = 0; i < vetVeiculos.size(); i++) {
+					VeiculoResponse v = vetVeiculos.get(i);
+					mostrarVeiculosPelaCorOuQuantidadeDePortas(v);
+				}
+				break;
+				
+			}
+
+			
 			
 			//------------------------------------CASE - 10 -Busca veículos pela cor -------------------------------------------------------------
 			case 10: {
@@ -154,6 +204,7 @@ public class Teste {
 				break;
 			}
 
+			
 			//------------------------------------CASE - 11 - Busca veículos pela quantidade de portas -------------------------------------------------------------
 			
 			case 11: {
@@ -175,6 +226,8 @@ public class Teste {
 				break;
 			}
 			
+			
+			
 			//------------------------------------CASE - 12 - Altera Veículo -------------------------------------------------------------
 			case 12:{
 				
@@ -195,8 +248,7 @@ public class Teste {
 				
 				break;
 				
-				
-				
+							
 				
 			}
 			
@@ -275,6 +327,7 @@ public class Teste {
 	}
 
 	public static void mostrarProprietario(Proprietario pEcontrada) {
+		System.out.print("<-------------------------------------------------------------------->");
 		System.out.println("\n\n");
 		System.out.println("Código CNH : " + pEcontrada.getCodCnh());
 		System.out.println("Nome : " + pEcontrada.getNome());
@@ -285,6 +338,7 @@ public class Teste {
 	}
 
 	public static void mostrarVeiculosPelaCorOuQuantidadeDePortas(VeiculoResponse vEcontrado) {
+		System.out.print("<-------------------------------------------------------------------->");
 		System.out.print("\n");
 		System.out.print("\nPlaca.........: " + vEcontrado.getPlaca());
 		System.out.print("\nCor.......: " + vEcontrado.getCor());
@@ -296,6 +350,18 @@ public class Teste {
 	}
 
 	public static void mostrarVeiculoPelaPlaca(VeiculoResponse vEcontrada) {
+		System.out.print("<-------------------------------------------------------------------->");
+		System.out.println("\n\n");
+		System.out.println("Nome do Proprietario do Veículo : " + vEcontrada.getNome());
+		System.out.println("Placa do veículo : " + vEcontrada.getPlaca());
+		System.out.println("Cor do veículo : " + vEcontrada.getCor());
+		System.out.println("Descrição do veículo : " + vEcontrada.getDescricao());
+		System.out.println("Quantidade de portas do veículos : " + vEcontrada.getQuantidadePortas());
+
+	}
+	
+	public static void mostrarVeiculoPelaCor(VeiculoResponse vEcontrada) {
+		System.out.print("<-------------------------------------------------------------------->");
 		System.out.println("\n\n");
 		System.out.println("Nome do Proprietario do Veículo : " + vEcontrada.getNome());
 		System.out.println("Placa do veículo : " + vEcontrada.getPlaca());
@@ -306,6 +372,7 @@ public class Teste {
 	}
 	
 	public static void mostrarVeiculoPelaPlacaVeiculo(Veiculo vEcontrada) {
+		System.out.print("<-------------------------------------------------------------------->");
 		System.out.println("\n\n");
 		System.out.println("ID do Proprietario do Veículo : " + vEcontrada.getIdProprietario());
 		System.out.println("Placa do veículo : " + vEcontrada.getPlaca());
@@ -473,7 +540,38 @@ public class Teste {
 
 		return vec;
 	}
+	
+	
+	public static ArrayList<VeiculoResponse> buscarVeiculoCompleto() throws SQLException {
 
+		
+		ArrayList<VeiculoResponse> vetVeiculos = new ArrayList<VeiculoResponse>();
+
+		conexao = ConexaoBD.getConexao();
+
+		String sql = "select v.placa, v.cor , v.descricao, v.quantidadePortas ,p.nome from proprietario p  left join veiculo v on  v.idProprietario = p.idProprietario order by p.nome ASC;";
+		PreparedStatement stmt = conexao.prepareStatement(sql);
+		ResultSet resultado = stmt.executeQuery();
+
+		while (resultado.next()) {
+
+			VeiculoResponse vec = new VeiculoResponse();
+
+			vec.setPlaca(resultado.getString(1));
+			vec.setCor(resultado.getString(2));
+			vec.setDescricao(resultado.getString(3));
+			vec.setQuantidadePortas(resultado.getString(4));
+			vec.setNome(resultado.getString(5));
+
+			vetVeiculos.add(vec);
+		}
+
+		resultado.close();
+		stmt.close();
+
+		return vetVeiculos;
+	}
+	
 	
 	public static ArrayList<VeiculoResponse> listaVeiculosBuscadosPelaCor(String cor) throws Exception {
 		ArrayList<VeiculoResponse> vetContas = new ArrayList<VeiculoResponse>();
@@ -584,6 +682,8 @@ public class Teste {
 		stmt.close();
 		
 
-      }
+      
+    
+}
     
 }

@@ -8,6 +8,15 @@ public class VeiculoResponse {
 	String descricao;
 	String quantidadePortas;
 	String nome;
+	private Proprietario p;
+
+	public Proprietario getP() {
+		return p;
+	}
+
+	public void setP(Proprietario p) {
+		this.p = p;
+	}
 
 	public VeiculoResponse() {
 
@@ -60,5 +69,6 @@ public class VeiculoResponse {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 
 }
